@@ -5,7 +5,6 @@ import './StoreFront.css';
 class StoreFront extends Component {
     constructor() {
         super();
-
         this.state = {
             products: []
         }
@@ -14,13 +13,15 @@ class StoreFront extends Component {
     componentDidMount() {
         axios.get("https://practiceapi.devmountain.com/products/")
             .then((response) => {
+                console.log(response.data)
                 this.setState({
-                    products: response
+                    products: response.data
                 })
             })
     }
 
     render() {
+        console.log(this.state.products)
         let productDisplay = this.state.products.map((element, index) => {
             return (
                 <div className="product-container" key={index}>
@@ -33,8 +34,10 @@ class StoreFront extends Component {
             )
         })
         return (
-            <div className="storefront-container">
+            <div>
+                <div className="storefront-container">
                 {productDisplay}
+                </div>
             </div>
         )
     }
